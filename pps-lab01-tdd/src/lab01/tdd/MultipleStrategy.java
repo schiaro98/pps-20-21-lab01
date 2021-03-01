@@ -1,8 +1,16 @@
-import lab01.tdd.SelectStrategy;
+package lab01.tdd;
 
 public class MultipleStrategy implements SelectStrategy {
 
 	private int multiplier = 1;
+
+	public MultipleStrategy(){
+
+	}
+
+	public MultipleStrategy(int num){
+		this.multiplier = num;
+	}
 
 	@Override
 	public boolean apply(int element) {

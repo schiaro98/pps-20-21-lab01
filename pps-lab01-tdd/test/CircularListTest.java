@@ -1,9 +1,5 @@
-import lab01.tdd.CircularList;
-import lab01.tdd.CircularListImpl;
-import lab01.tdd.EvenStrategy;
-import lab01.tdd.OddStrategy;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
+import lab01.tdd.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,7 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CircularListTest {
 
-    private final CircularList list = new CircularListImpl();
+    private CircularList list;
+
+    @BeforeEach
+    void initializeList(){
+        this.list = new CircularListImpl();
+    }
 
     @Test
     void testListEmpty(){
@@ -98,8 +99,7 @@ public class CircularListTest {
     @Test
     void testMultipleStrategy(){
         fillList(0,50); //Riempo la lista da 0 a 50
-        MultipleStrategy strategy = new MultipleStrategy();
-        strategy.setMultiplier(3);
+        MultipleStrategy strategy = new MultipleStrategy(3);
         for (int i = 0; i < list.size(); i+=3) {
             assertTrue(checkOptional(list.next(strategy), i));
         }
@@ -110,8 +110,7 @@ public class CircularListTest {
     @Test
     void testEqualStrategy(){
         fillList(0,50); //Riempo la lista da 0 a 50
-        EqualStrategy strategy = new EqualStrategy();
-        strategy.setTarget(3);
+        EqualStrategy strategy = new EqualStrategy(3);
         assertTrue(checkOptional(list.next(strategy), 3));
         assertFalse(checkOptional(list.next(strategy), 4));
         strategy.setTarget(18);
@@ -135,6 +134,16 @@ public class CircularListTest {
         assertTrue(checkOptional(list.next(), 2));
         assertTrue(checkOptional(list.next(), 3));
         assertTrue(checkOptional(list.next(), 0));
+    }
+
+    @Test
+    void testfactory(){
+        fillList(0,50);
+
+        StrategyFactory factory = new StrategyFactoryImpl();
+        SelectStrategy strategy = factory.createOddStrategy();
+        assertTrue(checkOptional(list.next(strategy), 1));
+        assertTrue(checkOptional(list.next(strategy), 3));
     }
 
     void fillList(int start, int max){

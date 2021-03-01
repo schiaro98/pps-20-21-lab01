@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CircularListTest {
 
-    //TODO: test implementation
+    //TODO: Cambiare next e previous se aggiungo (o rimuovo?) un elemento
 
     CircularList list = new CircularListImpl();
 
@@ -25,6 +25,8 @@ public class CircularListTest {
 
     @Test
     void testListEmpty(){
+        assertTrue(list.isEmpty());
+        list.add(1);
         assertFalse(list.isEmpty());
     }
 
@@ -44,6 +46,7 @@ public class CircularListTest {
         assertTrue(checkOptional(list.next(), 1));
         assertTrue(checkOptional(list.next(), 2));
 
+        //Controllo che il prossimo elemento se sono a fine lista sia il primo
         assertTrue(checkOptional(list.next(), 0));
     }
 
@@ -51,29 +54,22 @@ public class CircularListTest {
     void testPrevious(){
         fillList(0,3);
 
-        Optional<Integer> result = list.next();
-        assertTrue(checkOptional(result, 0));
+        //Scorro avanti e indietro la lista alla ricerca di errori
+        assertTrue(checkOptional(list.next(), 0));
 
-        result = list.next();
-        assertTrue(checkOptional(result, 1));
+        assertTrue(checkOptional(list.next(), 1));
 
-        result = list.next();
-        assertTrue(checkOptional(result, 2));
+        assertTrue(checkOptional(list.next(), 2));
 
-        result = list.previous();
-        assertTrue(checkOptional(result, 1));
+        assertTrue(checkOptional(list.previous(), 1));
 
-        result = list.previous();
-        assertTrue(checkOptional(result, 0));
+        assertTrue(checkOptional(list.previous(), 0));
 
-        result = list.next();
-        assertTrue(checkOptional(result, 1));
+        assertTrue(checkOptional(list.next(), 1));
 
-        result = list.previous();
-        assertTrue(checkOptional(result, 0));
+        assertTrue(checkOptional(list.previous(), 0));
 
-        result = list.previous();
-        assertTrue(checkOptional(result, 2));
+        assertTrue(checkOptional(list.previous(), 2));
     }
 
     void fillList(int start, int max){

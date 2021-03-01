@@ -100,12 +100,22 @@ public class CircularListTest {
         fillList(0,50); //Riempo la lista da 0 a 50
         MultipleStrategy strategy = new MultipleStrategy();
         strategy.setMultiplier(3);
-        assertTrue(checkOptional(list.next(strategy), 0));
-        assertTrue(checkOptional(list.next(strategy), 3));
-        assertTrue(checkOptional(list.next(strategy), 6));
-        assertTrue(checkOptional(list.next(strategy), 9));
+        for (int i = 0; i < list.size(); i+=3) {
+            assertTrue(checkOptional(list.next(strategy), i));
+        }
         assertFalse(checkOptional(list.next(strategy), 11));
-        assertTrue(checkOptional(list.next(strategy), 15));
+        assertFalse(checkOptional(list.next(strategy), 16));
+    }
+
+    @Test
+    void testEqualStrategy(){
+        fillList(0,50); //Riempo la lista da 0 a 50
+        EqualStrategy strategy = new EqualStrategy();
+        strategy.setTarget(3);
+        assertTrue(checkOptional(list.next(strategy), 3));
+        assertFalse(checkOptional(list.next(strategy), 4));
+        strategy.setTarget(18);
+        assertTrue(checkOptional(list.next(strategy), 18));
     }
 
 

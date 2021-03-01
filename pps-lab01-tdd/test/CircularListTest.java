@@ -14,14 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CircularListTest {
 
-    //TODO: Cambiare next e previous se aggiungo (o rimuovo?) un elemento
-
-    CircularList list = new CircularListImpl();
-
-    @Disabled
-    @Test public void testTodo(){
-        Assertions.fail();
-    }
+    private final CircularList list = new CircularListImpl();
 
     @Test
     void testListEmpty(){
@@ -75,6 +68,11 @@ public class CircularListTest {
     @Test
     void testPreviousEmptyList(){
         assertEquals(list.previous(), Optional.empty());
+    }
+
+    @Test
+    void testNextEmptyList(){
+        assertEquals(list.next(), Optional.empty());
     }
 
     void fillList(int start, int max){

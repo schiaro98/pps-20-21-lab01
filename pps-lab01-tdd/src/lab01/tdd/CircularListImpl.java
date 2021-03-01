@@ -26,6 +26,9 @@ public class CircularListImpl implements CircularList {
 
 	@Override
 	public Optional<Integer> next() {
+		if(list.isEmpty()){
+			return Optional.empty();
+		}
 		Integer result;
 		result = list.get(nextElement);
 		nextElement++;
@@ -38,8 +41,6 @@ public class CircularListImpl implements CircularList {
 
 	@Override
 	public Optional<Integer> previous() {
-		System.out.println(nextElement);
-		Integer result;
 		if(list.isEmpty()){
 			return Optional.empty();
 		}

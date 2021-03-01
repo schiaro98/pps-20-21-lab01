@@ -40,7 +40,9 @@ public class CircularListImpl implements CircularList {
 	public Optional<Integer> previous() {
 		System.out.println(nextElement);
 		Integer result;
-
+		if(list.isEmpty()){
+			return Optional.empty();
+		}
 		if (nextElement == 0) {
 			//Mi trovo a fine lista
 			//Il previous è il penultimo elemento

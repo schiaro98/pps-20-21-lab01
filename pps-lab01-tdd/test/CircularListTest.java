@@ -41,7 +41,7 @@ public class CircularListTest {
         //Riempo la lista
         fillList(0,3);
 
-        //Create la lista {0,1,2} controllo sia corretta
+        //Creo la lista {0,1,2} e controllo sia corretta
         assertTrue(checkOptional(list.next(), 0));
         assertTrue(checkOptional(list.next(), 1));
         assertTrue(checkOptional(list.next(), 2));
@@ -70,6 +70,11 @@ public class CircularListTest {
         assertTrue(checkOptional(list.previous(), 0));
 
         assertTrue(checkOptional(list.previous(), 2));
+    }
+
+    @Test
+    void testPreviousEmptyList(){
+        assertEquals(list.previous(), Optional.empty());
     }
 
     void fillList(int start, int max){

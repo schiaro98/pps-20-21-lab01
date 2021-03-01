@@ -1,12 +1,13 @@
 package lab01.tdd;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class CircularListImpl implements CircularList {
 
-	List<Integer> list = new ArrayList<>();
+	final List<Integer> list = new ArrayList<>();
 	int nextElement = 0;
 
 	@Override
@@ -74,6 +75,15 @@ public class CircularListImpl implements CircularList {
 
 	@Override
 	public Optional<Integer> next(SelectStrategy strategy) {
-		return Optional.empty();
+		Optional<Integer> result = this.next();
+		if(result.isPresent()){
+			if(strategy.apply(result.get())){
+				return result;
+			} else {
+				return next(strategy);
+			}
+		} else {
+			return Optional.empty();
+		}
 	}
 }

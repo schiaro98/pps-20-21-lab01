@@ -1,5 +1,7 @@
 import lab01.tdd.CircularList;
 import lab01.tdd.CircularListImpl;
+import lab01.tdd.EvenStrategy;
+import lab01.tdd.OddStrategy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -73,6 +75,24 @@ public class CircularListTest {
     @Test
     void testNextEmptyList(){
         assertEquals(list.next(), Optional.empty());
+    }
+
+    @Test
+    void testStrategy(){
+        fillList(0,10); //Riempo la lista da 0 a 9
+
+        for (int i = 0; i < list.size(); i+=2) {
+            assertTrue(checkOptional(list.next(new EvenStrategy()), i));
+        }
+    }
+
+    @Test
+    void testOddStrategy(){
+        fillList(0,10); //Riempo la lista da 0 a 9
+
+        for (int i = 0; i < list.size() - 1; i+=2) {
+            assertTrue(checkOptional(list.next(new OddStrategy()), i+1));
+        }
     }
 
     void fillList(int start, int max){

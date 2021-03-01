@@ -46,7 +46,7 @@ public class CircularListTest {
     }
 
     @Test
-    void testPrevious(){
+    void testNextAndPrevious(){
         fillList(0,3);
 
         //Scorro avanti e indietro la lista alla ricerca di errori
@@ -93,6 +93,24 @@ public class CircularListTest {
         for (int i = 0; i < list.size() - 1; i+=2) {
             assertTrue(checkOptional(list.next(new OddStrategy()), i+1));
         }
+    }
+
+    @Test
+    void testAll(){
+        fillList(0,2);
+
+        //Scorro avanti e indietro la lista alla ricerca di errori
+        assertTrue(checkOptional(list.next(), 0));
+        assertTrue(checkOptional(list.next(), 1));
+        assertTrue(checkOptional(list.next(), 0));
+
+        list.add(2);
+        list.add(3);
+
+        assertTrue(checkOptional(list.next(), 1));
+        assertTrue(checkOptional(list.next(), 2));
+        assertTrue(checkOptional(list.next(), 3));
+        assertTrue(checkOptional(list.next(), 0));
     }
 
     void fillList(int start, int max){

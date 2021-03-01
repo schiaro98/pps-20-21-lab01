@@ -32,9 +32,9 @@ class SimpleBankAccountTest {
 
     @Test
     void testWrongDeposit() {
-        bankAccount.deposit(accountHolder.getId(), 100);
-        bankAccount.deposit(2, 50);
-        assertEquals(100, bankAccount.getBalance());
+        bankAccount.deposit(accountHolder.getId(), 100); //Questo va
+        bankAccount.deposit(2, 50); //Questo non va
+        assertEquals(100, bankAccount.getBalance()); //
     }
 
     @Test
